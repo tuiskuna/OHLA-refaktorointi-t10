@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.peli","l":"Main"},{"p":"org.peli","l":"Pelaaja"},{"p":"org.peli","l":"Peli"}];updateSearchResults();
