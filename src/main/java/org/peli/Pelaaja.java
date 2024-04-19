@@ -3,39 +3,54 @@ package org.peli;
 
 /**
  *
- * @author Ira Dook
+ * @author Tuisku Närhi
+ */
+/**
+ * Peliin osallistuva pelaaja.
  */
 public class Pelaaja {
-
-    int voitot;      // Voittojen lukumäärä
-    int voitotYhteensä;
+    private int voitot;
 
     /**
-     * Valitse randomilla kivi, paperi tai sakset
+     * Valitsee satunnaisesti kiven, paperin tai sakset.
+     *
+     * @return Pelaajan valinta (kivi, paperi tai sakset)
      */
-    public String pelaajanValinta() {
-        String valinta = "";
-        int c = (int) (Math.random() * 3);
-        switch (c) {
-            case 0:
-                valinta = ("kivi");
-                break;
-            case 1:
-                valinta = ("paperi");
-                break;
-            case 2:
-                valinta = ("sakset");
-                break;
-        }
-        return valinta;
+    public String valitse() {
+        int valinta = (int) (Math.random() * 3);
+        return switch (valinta) {
+            case 0 -> "kivi";
+            case 1 -> "paperi";
+            case 2 -> "sakset";
+            default -> "";
+        };
     }
 
-    public int setVoitot() {
-        int voitotYhteensä = voitot++;
-        return voitotYhteensä;
-    }
-
+    /**
+     * Palauttaa pelaajan voittojen lukumäärän.
+     *
+     * @return Voittojen lukumäärä
+     */
     public int getVoitot() {
-        return (voitot);
+        return voitot;
+    }
+
+    /**
+     * Lisää pelaajan voittojen lukumäärää yhdellä.
+     */
+    public void lisaaVoitto() {
+        voitot++;
+    }
+    /**
+     * Tarkistaa, voittaako pelaaja annetun vastustajan valinnan perusteella.
+     *
+     * @param pelaajanValinta   Pelaajan valinta (kivi, paperi tai sakset)
+     * @param vastustajanValinta Vastustajan valinta (kivi, paperi tai sakset)
+     * @return true jos pelaaja voittaa, muuten false
+     */
+    public boolean tarkistaVoitto(String pelaajanValinta, String vastustajanValinta) {
+        return (pelaajanValinta.equals("kivi") && vastustajanValinta.equals("sakset")) ||
+                (pelaajanValinta.equals("paperi") && vastustajanValinta.equals("kivi")) ||
+                (pelaajanValinta.equals("sakset") && vastustajanValinta.equals("paperi"));
     }
 }

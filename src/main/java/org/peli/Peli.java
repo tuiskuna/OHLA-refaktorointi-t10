@@ -4,64 +4,55 @@ package org.peli;
  *
  * @author Ira Dook
  */
+/**
+ * Kivi sakset paperi pelin logiikka
+ */
 public class Peli {
+    private Pelaaja pelaaja1;
+    private Pelaaja pelaaja2;
+    private int tasapelit;
 
-    public static void main(String args[]) {
-        Pelaaja p1 = new Pelaaja();
-        Pelaaja p2 = new Pelaaja();
-        boolean peliLoppui = false;
-        int pelatutPelit = 0;           // Pelattujen pelien lkm
-        int p1Voitot = p1.voitot;       // Pelaaja 1:n voittojen lkm
-        int p2Voitot = p2.voitot;       // Pelaaja 2:n voittojen lkm
-        int tasapelit = 0;              // Tasapelien lkm
-        String p1Valinta;
-        String p2Valinta;
-       
-        do {
-            System.out.println("Erä: "
-                    + pelatutPelit + " =====================\n");
-            System.out.println("Tasapelien lukumäärä: "
-                    + tasapelit + "\n");
-            p1Valinta = p1.pelaajanValinta();
-            System.out.println("Pelaaja 1: " + p1Valinta
-                    + "\n\t Pelaaja 1:llä koossa " + p1Voitot + " voittoa.");
-            p2Valinta = p2.pelaajanValinta();
-            System.out.println("Pelaaja 2: " + p2Valinta
-                    + "\n\t Pelaaja 2:lla koossa " + p2Voitot + " voittoa.");
-            
-            // Allaolevassa pätkässä on yritetty eri tapoja saada
-            // lukumäärän laskeminen toimimaan oikein.
-            // Ei tää kyllä vieläkään skulaa - KORJAA!
-            
-            if ((p1Valinta.equals("kivi")) && (p2Valinta.equals("paperi"))) {
-                System.out.println("Pelaaja 2 voittaa");
-                p2Voitot++;  // Kokeile eri tapoja saada lukumäärän laskenta kuntoon
-            } else if ((p1Valinta.equals("paperi")) && (p2Valinta.equals("kivi"))) {
-                p1Voitot++;
-                System.out.println("Pelaaja 1 voittaa");
-            } else if ((p1Valinta.equals("kivi")) && (p2Valinta.equals("sakset"))) {
-                p1Voitot = p1.setVoitot();
-                System.out.println("Pelaaja 1 voittaa");
-            } else if ((p1Valinta.equals("sakset")) && (p2Valinta.equals("kivi"))) {
-                p2Voitot = p2.setVoitot();
-                System.out.println("Pelaaja 2 voittaa");
-            } else if ((p1Valinta.equals("sakset")) && (p2Valinta.equals("paperi"))) {
-                p1Voitot = p1.setVoitot();
-                System.out.println("Pelaaja 1 voittaa");
-            } else if ((p1Valinta.equals("paperi")) && (p2Valinta.equals("sakset"))) {
-                p2Voitot = p2.setVoitot();
-                System.out.println("Pelaaja 2 voittaa");
-            }
-            if (p1Valinta == p2Valinta) {
+    /**
+     * Luo uuden pelin annetuille pelaajille.
+     *
+     * @param pelaaja1 Ensimmäinen pelaaja
+     * @param pelaaja2 Toinen pelaaja
+     */
+    public Peli(Pelaaja pelaaja1, Pelaaja pelaaja2) {
+        this.pelaaja1 = pelaaja1;
+        this.pelaaja2 = pelaaja2;
+        this.tasapelit = 0;
+    }
+
+    /**
+     * Aloittaa pelin joka jatkuu kunnes jompikumpi pelaaja saavuttaa 3 voittoa.
+     * Tulostaa myös jokaisen kierroksen tulokset.
+     */
+    public void pelaa() {
+        while (pelaaja1.getVoitot() < 3 && pelaaja2.getVoitot() < 3) {
+            String valintaP1 = pelaaja1.valitse();
+            String valintaP2 = pelaaja2.valitse();
+
+            System.out.println("Pelaaja 1 valitsi: " + valintaP1);
+            System.out.println("Pelaaja 2 valitsi: " + valintaP2);
+
+            if (valintaP1.equals(valintaP2)) {
                 tasapelit++;
-                System.out.println("\n\t\t\t Tasapeli \n");
+                System.out.println("Tasapeli!");
+            } else if (pelaaja1.tarkistaVoitto(valintaP1, valintaP2)) {
+                pelaaja1.lisaaVoitto();
+                System.out.println("Pelaaja 1 voittaa!");
+            } else {
+                pelaaja2.lisaaVoitto();
+                System.out.println("Pelaaja 2 voittaa!");
             }
-            pelatutPelit++;
-            if ((p1.getVoitot() >= 3) || (p2.getVoitot() >= 3)) {
-                peliLoppui = true;
-                System.out.println("KOLME VOITTOA - PELI PÄÄTTYY");
-            }
-            System.out.println();
-        } while (peliLoppui != true);
+
+            System.out.println("Voittoja yhteensä:");
+            System.out.println("Pelaaja 1: " + pelaaja1.getVoitot());
+            System.out.println("Pelaaja 2: " + pelaaja2.getVoitot());
+            System.out.println("Tasapelit: " + tasapelit + "\n");
+        }
+
+        System.out.println("Peli päättyi!");
     }
 }
