@@ -5,25 +5,26 @@ package org.peli;
  *
  * @author Tuisku Närhi
  */
+
+import java.util.Random;
 /**
  * Peliin osallistuva pelaaja.
  */
 public class Pelaaja {
+    //Taulukko eri vaihtoehdoille
+    private static final String[] VAIHTOEHDOT = {"kivi", "paperi", "sakset"};
+    private static final Random random = new Random();
     private int voitot;
 
     /**
-     * Valitsee satunnaisesti kiven, paperin tai sakset.
+     * Valitsee satunnaisesti kiven, paperin tai sakset. arpomalla numeron ja palauttamalla arvottua numeroa vastaavan vaihtoehdon taulukosta.
      *
      * @return Pelaajan valinta (kivi, paperi tai sakset)
      */
     public String valitse() {
-        int valinta = (int) (Math.random() * 3);
-        return switch (valinta) {
-            case 0 -> "kivi";
-            case 1 -> "paperi";
-            case 2 -> "sakset";
-            default -> "";
-        };
+        //ar
+        int indeksi = random.nextInt(VAIHTOEHDOT.length);
+        return VAIHTOEHDOT[indeksi];
     }
 
     /**

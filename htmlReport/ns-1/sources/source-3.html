@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Peli</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.peli</a>
+</div>
+
+<h1>Coverage Summary for Class: Peli (org.peli)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Peli</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87,5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package org.peli;
+&nbsp;
+&nbsp;/**
+&nbsp; *
+&nbsp; * @author Ira Dook
+&nbsp; */
+&nbsp;/**
+&nbsp; * Kivi sakset paperi pelin logiikka
+&nbsp; */
+&nbsp;public class Peli {
+&nbsp;    private Pelaaja pelaaja1;
+&nbsp;    private Pelaaja pelaaja2;
+&nbsp;    private int tasapelit;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Luo uuden pelin annetuille pelaajille.
+&nbsp;     *
+&nbsp;     * @param pelaaja1 Ensimmäinen pelaaja
+&nbsp;     * @param pelaaja2 Toinen pelaaja
+&nbsp;     */
+<b class="fc">&nbsp;    public Peli(Pelaaja pelaaja1, Pelaaja pelaaja2) {</b>
+<b class="fc">&nbsp;        this.pelaaja1 = pelaaja1;</b>
+<b class="fc">&nbsp;        this.pelaaja2 = pelaaja2;</b>
+<b class="fc">&nbsp;        this.tasapelit = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Aloittaa pelin joka jatkuu kunnes jompikumpi pelaaja saavuttaa 3 voittoa.
+&nbsp;     * Tulostaa myös jokaisen kierroksen tulokset.
+&nbsp;     */
+&nbsp;    public void pelaa() {
+<b class="pc">&nbsp;        while (pelaaja1.getVoitot() &lt; 3 &amp;&amp; pelaaja2.getVoitot() &lt; 3) {</b>
+<b class="fc">&nbsp;            String valintaP1 = pelaaja1.valitse();</b>
+<b class="fc">&nbsp;            String valintaP2 = pelaaja2.valitse();</b>
+&nbsp;
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 1 valitsi: &quot; + valintaP1);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 2 valitsi: &quot; + valintaP2);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (valintaP1.equals(valintaP2)) {</b>
+<b class="fc">&nbsp;                tasapelit++;</b>
+<b class="fc">&nbsp;                System.out.println(&quot;Tasapeli!&quot;);</b>
+<b class="fc">&nbsp;            } else if (pelaaja1.tarkistaVoitto(valintaP1, valintaP2)) {</b>
+<b class="fc">&nbsp;                pelaaja1.lisaaVoitto();</b>
+<b class="fc">&nbsp;                System.out.println(&quot;Pelaaja 1 voittaa!&quot;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                pelaaja2.lisaaVoitto();</b>
+<b class="fc">&nbsp;                System.out.println(&quot;Pelaaja 2 voittaa!&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            System.out.println(&quot;Voittoja yhteensä:&quot;);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 1: &quot; + pelaaja1.getVoitot());</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 2: &quot; + pelaaja2.getVoitot());</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Tasapelit: &quot; + tasapelit + &quot;\n&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        System.out.println(&quot;Peli päättyi!&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-19 16:33</div>
+</div>
+</body>
+</html>
